@@ -3,10 +3,10 @@ execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DE
 # รีเซ็ตตัวนับใบไม้
 scoreboard players set @s ct.leaves_broken 0
 
-execute as @e[type=marker,tag=ct.mark] at @s run function cut_tree:break_log
+execute as @e[type=marker,tag=ct.mark] at @s run function tree_cut:break_log
 
 # ทำลายใบไม้รอบๆ บล็อกไม้แต่ละอัน (รัศมี 3 บล็อก เฉพาะต้นตัวเอง + drop ของ)
-execute if score #config.break_leaves ct.count matches 1.. run execute as @e[type=marker,tag=ct.mark] at @s run function cut_tree:break_leaves_around
+execute if score #config.break_leaves ct.count matches 1.. run execute as @e[type=marker,tag=ct.mark] at @s run function tree_cut:break_leaves_around
 
 execute if score #config.debug ct.count matches 1.. if score #config.break_leaves ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] Destroyed leaves around each log","color":"gray"}]
 

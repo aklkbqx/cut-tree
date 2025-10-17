@@ -3,12 +3,12 @@
 # 1. นับจำนวนใบไม้รอบๆ บล็อกไม้ทั้งหมด
 scoreboard players set @s ct.leaves 0
 scoreboard players set @s ct.leaves_total 0
-execute as @e[type=marker,tag=ct.mark] at @s run function cut_tree:check_leaves
-execute as @e[type=marker,tag=ct.mark] at @s run function cut_tree:count_leaves
+execute as @e[type=marker,tag=ct.mark] at @s run function tree_cut:check_leaves
+execute as @e[type=marker,tag=ct.mark] at @s run function tree_cut:count_leaves
 
 # 2. ตรวจความสูงของต้นไม้ (นับจากบล็อกล่างสุด)
 scoreboard players set @s ct.height 1
-execute as @e[type=marker,tag=ct.mark,sort=nearest,limit=1] at @s run function cut_tree:check_tree_height
+execute as @e[type=marker,tag=ct.mark,sort=nearest,limit=1] at @s run function tree_cut:check_tree_height
 
 # 3. Debug info (แสดงเฉพาะ debug mode)
 execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] === TREE VALIDATION ===","color":"aqua","bold":true}]

@@ -7,4 +7,4 @@ execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DE
 execute if score @s ct.count > #config.max_logs ct.count run tellraw @s [{"text":"⚠ Tree too large! ","color":"red"},{"score":{"name":"@s","objective":"ct.count"},"color":"yellow"},{"text":"/","color":"gray"},{"score":{"name":"#config.max_logs","objective":"ct.count"},"color":"yellow"},{"text":" logs","color":"gray"}]
 execute if score @s ct.count > #config.max_logs ct.count run return fail
 
-function cut_tree:validate
+function tree_cut:validate
