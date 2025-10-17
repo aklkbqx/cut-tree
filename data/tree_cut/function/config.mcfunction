@@ -1,4 +1,4 @@
-# Cut Tree Configuration
+# Tree Cut Configuration
 # ตั้งค่าการทำงานของ Datapack
 
 # Debug Messages (0=ปิด, 1=เปิด) - แนะนำปิดเมื่อเล่นจริง

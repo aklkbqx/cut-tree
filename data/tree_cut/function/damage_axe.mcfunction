@@ -15,7 +15,7 @@ execute unless score #axe_damage ct.count matches 1.. run scoreboard players set
 execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] Durability loss: ","color":"gray"},{"score":{"name":"#axe_damage","objective":"ct.count"},"color":"red","bold":true},{"text":" (10% of ","color":"gray"},{"score":{"name":"#destroyed","objective":"ct.count"},"color":"yellow"},{"text":" logs)","color":"gray"}]
 
 # ตรวจสอบว่าผู้เล่นถือขวานอยู่
-execute unless predicate cut_tree:holding_axe run return fail
+execute unless predicate tree_cut:holding_axe run return fail
 
 # เริ่ม loop ลด durability
-function cut_tree:damage_axe_loop
+function tree_cut:damage_axe_loop

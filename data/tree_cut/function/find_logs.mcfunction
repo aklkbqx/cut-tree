@@ -12,4 +12,4 @@ execute if score @s ct.count > #config.max_logs ct.count run tellraw @s [{"text"
 execute if score @s ct.count > #config.max_logs ct.count run tellraw @s [{"text":"💡 เพิ่มค่า max_logs ใน config.mcfunction","color":"gold","italic":true}]
 execute if score @s ct.count > #config.max_logs ct.count run return fail
 
-function cut_tree:validate
+function tree_cut:validate

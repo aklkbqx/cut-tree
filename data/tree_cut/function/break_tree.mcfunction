@@ -9,7 +9,7 @@ execute as @e[type=marker,tag=ct.mark] at @s if block ~ ~ ~ #minecraft:logs run 
 scoreboard players add #destroyed ct.count 1
 
 # ทำลายทุกบล็อกที่ทำ marker ไว้
-execute as @e[type=marker,tag=ct.mark] at @s run function cut_tree:break_log
+execute as @e[type=marker,tag=ct.mark] at @s run function tree_cut:break_log
 
 # แสดงผลลัพธ์ที่แม่นยำ - แสดงทั้ง debug และ normal mode
 execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"green"}]
@@ -21,6 +21,6 @@ execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"━
 execute unless score #config.debug ct.count matches 1.. run tellraw @s [{"text":"🪓 ","color":"green"},{"text":"ตัดไม้ ","color":"green"},{"score":{"name":"#destroyed","objective":"ct.count"},"color":"yellow","bold":true},{"text":" บล็อก","color":"green"}]
 
 # ลด durability ของขวาน (10% จากจำนวนไม้)
-execute if score #config.damage_axe ct.count matches 1.. run function cut_tree:damage_axe
+execute if score #config.damage_axe ct.count matches 1.. run function tree_cut:damage_axe
 
 kill @e[type=marker,tag=ct.mark]

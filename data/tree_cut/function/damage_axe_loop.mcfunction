@@ -11,11 +11,11 @@ execute store result score #current_damage ct.count run data get entity @s Selec
 scoreboard players add #current_damage ct.count 1
 
 # เซ็ตค่ากลับไปที่ item ผ่าน storage และ macro function
-execute store result storage cut_tree:temp damage int 1 run scoreboard players get #current_damage ct.count
-function cut_tree:damage_axe_apply with storage cut_tree:temp
+execute store result storage tree_cut:temp damage int 1 run scoreboard players get #current_damage ct.count
+function tree_cut:damage_axe_apply with storage tree_cut:temp
 
 # ลดตัวนับ
 scoreboard players remove #axe_damage ct.count 1
 
 # เรียกตัวเองต่อถ้ายังเหลือ
-execute if score #axe_damage ct.count matches 1.. run function cut_tree:damage_axe_loop
+execute if score #axe_damage ct.count matches 1.. run function tree_cut:damage_axe_loop
