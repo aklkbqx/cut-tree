@@ -29,6 +29,10 @@ execute positioned ~1 ~ ~1 if block ~ ~ ~ #minecraft:logs if block ~-1 ~ ~ #mine
 
 execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] Scan complete. Running find_logs with count: ","color":"gray"},{"score":{"name":"@s","objective":"ct.count"},"color":"yellow"}]
 
+# บวก +1 เพื่อนับบล็อกแรกที่ผู้เล่นตัดไปแล้ว
+execute if score @s ct.count matches 1.. run scoreboard players add @s ct.count 1
+execute if score #config.debug ct.count matches 1.. if score @s ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] +1 for player-mined block. Total: ","color":"gray"},{"score":{"name":"@s","objective":"ct.count"},"color":"yellow","bold":true}]
+
 function cut_tree:find_logs
 
 execute if score @s ct.valid matches 1 run function cut_tree:break_tree

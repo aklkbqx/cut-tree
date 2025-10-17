@@ -1,18 +1,26 @@
-execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] Breaking ","color":"gray"},{"score":{"name":"@s","objective":"ct.count"},"color":"yellow"},{"text":" logs...","color":"gray"}]
+# แสดงข้อความเริ่มตัด
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[BREAK] กำลังทำลายท่อนไม้ ","color":"gray"},{"score":{"name":"@s","objective":"ct.count"},"color":"yellow","bold":true},{"text":" บล็อก...","color":"gray"}]
 
-# รีเซ็ตตัวนับใบไม้
-scoreboard players set @s ct.leaves_broken 0
+# นับจำนวนบล็อกที่ทำลายจริง (ไม่รวมบล็อกที่ผู้เล่นตัด)
+scoreboard players set #destroyed ct.count 0
+execute as @e[type=marker,tag=ct.mark] at @s if block ~ ~ ~ #minecraft:logs run scoreboard players add #destroyed ct.count 1
 
+# บวก +1 สำหรับบล็อกที่ผู้เล่นตัดไปแล้ว
+scoreboard players add #destroyed ct.count 1
+
+# ทำลายทุกบล็อกที่ทำ marker ไว้
 execute as @e[type=marker,tag=ct.mark] at @s run function cut_tree:break_log
 
-# ทำลายใบไม้รอบๆ บล็อกไม้แต่ละอัน (รัศมี 3 บล็อก เฉพาะต้นตัวเอง + drop ของ)
-execute if score #config.break_leaves ct.count matches 1.. run execute as @e[type=marker,tag=ct.mark] at @s run function cut_tree:break_leaves_around
+# แสดงผลลัพธ์ที่แม่นยำ - แสดงทั้ง debug และ normal mode
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"green"}]
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"✓ ตัดไม้สำเร็จ!","color":"green","bold":true}]
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"📦 ทำลายแล้ว: ","color":"gray"},{"score":{"name":"#destroyed","objective":"ct.count"},"color":"yellow","bold":true},{"text":" บล็อกไม้","color":"gray"}]
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"green"}]
 
-execute if score #config.debug ct.count matches 1.. if score #config.break_leaves ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] Destroyed leaves around each log","color":"gray"}]
+# แสดงสรุปแบบสั้นสำหรับ normal mode
+execute unless score #config.debug ct.count matches 1.. run tellraw @s [{"text":"🪓 ","color":"green"},{"text":"ตัดไม้ ","color":"green"},{"score":{"name":"#destroyed","objective":"ct.count"},"color":"yellow","bold":true},{"text":" บล็อก","color":"green"}]
 
-# Message - แสดงเฉพาะ debug mode
-execute if score #config.debug ct.count matches 1.. if score #config.break_leaves ct.count matches 1.. if score @s ct.leaves_broken matches 1.. run tellraw @s [{"text":"✓ Cut down ","color":"green"},{"score":{"name":"@s","objective":"ct.count"},"color":"yellow"},{"text":" logs","color":"green"},{"text":" + ","color":"gray"},{"score":{"name":"@s","objective":"ct.leaves_broken"},"color":"yellow"},{"text":" leaves!","color":"green"}]
-execute if score #config.debug ct.count matches 1.. if score #config.break_leaves ct.count matches 1.. unless score @s ct.leaves_broken matches 1.. run tellraw @s [{"text":"✓ Cut down ","color":"green"},{"score":{"name":"@s","objective":"ct.count"},"color":"yellow"},{"text":" logs!","color":"green"}]
-execute if score #config.debug ct.count matches 1.. unless score #config.break_leaves ct.count matches 1.. run tellraw @s [{"text":"✓ Cut down ","color":"green"},{"score":{"name":"@s","objective":"ct.count"},"color":"yellow"},{"text":" logs!","color":"green"}]
+# ลด durability ของขวาน (10% จากจำนวนไม้)
+execute if score #config.damage_axe ct.count matches 1.. run function cut_tree:damage_axe
 
 kill @e[type=marker,tag=ct.mark]

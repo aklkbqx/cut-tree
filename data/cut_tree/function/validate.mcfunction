@@ -11,11 +11,12 @@ scoreboard players set @s ct.height 1
 execute as @e[type=marker,tag=ct.mark,sort=nearest,limit=1] at @s run function cut_tree:check_tree_height
 
 # 3. Debug info (แสดงเฉพาะ debug mode)
-execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] === TREE VALIDATION ===","color":"aqua","bold":true}]
-execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] Total Logs: ","color":"gray"},{"score":{"name":"@s","objective":"ct.count"},"color":"yellow"}]
-execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] Total Leaves: ","color":"gray"},{"score":{"name":"@s","objective":"ct.leaves_total"},"color":"yellow"}]
-execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] Tree Height: ","color":"gray"},{"score":{"name":"@s","objective":"ct.height"},"color":"yellow"}]
-execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] Leaves (old check): ","color":"gray"},{"score":{"name":"@s","objective":"ct.leaves"},"color":"yellow"}]
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"aqua"}]
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[VALIDATION] ตรวจสอบต้นไม้","color":"aqua","bold":true}]
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"aqua"}]
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"📊 จำนวนท่อนไม้: ","color":"gray"},{"score":{"name":"@s","objective":"ct.count"},"color":"yellow","bold":true},{"text":" บล็อก","color":"gray"}]
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"🍃 จำนวนใบไม้: ","color":"gray"},{"score":{"name":"@s","objective":"ct.leaves_total"},"color":"yellow","bold":true},{"text":" บล็อก","color":"gray"}]
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"📏 ความสูงต้นไม้: ","color":"gray"},{"score":{"name":"@s","objective":"ct.height"},"color":"yellow","bold":true},{"text":" บล็อก","color":"gray"}]
 
 # 4. เกณฑ์การตรวจสอบ (ผ่อนปรนแล้ว):
 # - มีใบไม้อย่างน้อย 3 บล็อก (ลดจาก 5)
@@ -34,8 +35,12 @@ execute if score @s ct.leaves_total matches 10.. run scoreboard players set @s c
 execute if score @s ct.height matches 5.. if score @s ct.leaves_total matches 2.. run scoreboard players set @s ct.valid 1
 
 # แสดงผลลัพธ์ (debug mode)
-execute if score #config.debug ct.count matches 1.. if score @s ct.valid matches 1.. run tellraw @s {"text":"[DEBUG] ✓ Valid tree confirmed!","color":"green","bold":true}
-execute if score #config.debug ct.count matches 1.. unless score @s ct.valid matches 1.. run tellraw @s [{"text":"[DEBUG] ✗ Not a valid tree! Need: (Height>=2 AND Leaves>=3) OR (Leaves>=10) OR (Height>=5 AND Leaves>=2)","color":"red"}]
-execute if score #config.debug ct.count matches 1.. run tellraw @s {"text":"[DEBUG] =========================","color":"aqua"}
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"aqua"}]
+execute if score #config.debug ct.count matches 1.. if score @s ct.valid matches 1.. run tellraw @s [{"text":"✓ ยืนยัน: เป็นต้นไม้จริง!","color":"green","bold":true}]
+execute if score #config.debug ct.count matches 1.. if score @s ct.valid matches 1.. run tellraw @s [{"text":"🪓 กำลังตัดไม้ ","color":"green"},{"score":{"name":"@s","objective":"ct.count"},"color":"yellow","bold":true},{"text":" บล็อก...","color":"green"}]
+execute if score #config.debug ct.count matches 1.. unless score @s ct.valid matches 1.. run tellraw @s [{"text":"✗ ไม่ใช่ต้นไม้จริง!","color":"red","bold":true}]
+execute if score #config.debug ct.count matches 1.. unless score @s ct.valid matches 1.. run tellraw @s [{"text":"เกณฑ์: (สูง≥2 และ ใบ≥3) หรือ (ใบ≥10) หรือ (สูง≥5 และ ใบ≥2)","color":"gray","italic":true}]
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"aqua"}]
 
-# Production message ถูกลบออกแล้ว (ไม่แสดงใน production mode)
+# ตรวจสอบว่าผ่านหรือไม่
+execute if score @s ct.valid matches 1.. run function cut_tree:break_tree
