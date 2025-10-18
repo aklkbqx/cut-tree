@@ -2,7 +2,7 @@
 # ตั้งค่าการทำงานของ Datapack
 
 # Debug Messages (0=ปิด, 1=เปิด, 2=verbose) - แนะนำปิดเมื่อเล่นจริง
-scoreboard players set #config.debug ct.count 2
+scoreboard players set #config.debug ct.count 0
 
 # ขนาดสูงสุดของต้นไม้ (จำนวนบล็อกไม้) - เพิ่มเป็น 5000 สำหรับต้นใหญ่
 scoreboard players set #config.max_logs ct.count 5000
