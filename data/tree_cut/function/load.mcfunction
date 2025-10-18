@@ -22,11 +22,10 @@ function tree_cut:config
 
 # แสดงข้อความ banner สวยงาม
 tellraw @a {"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"dark_green","bold":true}
-tellraw @a [{"text":"  🪓 Tree Cut Datapack ","color":"green","bold":true},{"text":"v1.1","color":"yellow"}]
+tellraw @a [{"text":"  🪓 Tree Cut Datapack ","color":"green","bold":true},{"text":"v1.2","color":"yellow"}]
 tellraw @a {"text":"  Automatically cut entire trees!","color":"gray","italic":true}
 tellraw @a {"text":""}
 tellraw @a [{"text":"  Developer: ","color":"gray"},{"text":"Akalak Kruaboon","color":"aqua","bold":true}]
-tellraw @a [{"text":"  Instagram: ","color":"gray"},{"text":"akl.kbqx","color":"light_purple","clickEvent":{"action":"open_url","value":"https://instagram.com/akl.kbqx"},"hoverEvent":{"action":"show_text","contents":"Click to open Instagram"}}]
 tellraw @a [{"text":"  GitHub: ","color":"gray"},{"text":"aklkbqx","color":"white","clickEvent":{"action":"open_url","value":"https://github.com/aklkbqx"},"hoverEvent":{"action":"show_text","contents":"Click to open GitHub"}}]
 tellraw @a {"text":""}
 tellraw @a [{"text":"  Status: ","color":"gray"},{"text":"✓ Loaded Successfully","color":"green"}]
