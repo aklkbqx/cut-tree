@@ -2,7 +2,7 @@
 # ใช้ #axe_damage ct.count เป็นตัวนับ
 
 # ตรวจสอบว่ายังต้องลดต่อไหม
-execute unless score #axe_damage ct.count matches 1.. run return fail
+execute unless score #axe_damage ct.count matches 1.. run return 0
 
 # อ่านค่า damage ปัจจุบัน (ถ้าไม่มีให้เป็น 0)
 execute store result score #current_damage ct.count run data get entity @s SelectedItem.components."minecraft:damage" 1

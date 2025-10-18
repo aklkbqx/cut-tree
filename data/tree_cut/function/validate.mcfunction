@@ -41,6 +41,3 @@ execute if score #config.debug ct.count matches 1.. if score @s ct.valid matches
 execute if score #config.debug ct.count matches 1.. unless score @s ct.valid matches 1.. run tellraw @s [{"text":"✗ ไม่ใช่ต้นไม้จริง!","color":"red","bold":true}]
 execute if score #config.debug ct.count matches 1.. unless score @s ct.valid matches 1.. run tellraw @s [{"text":"เกณฑ์: (สูง≥2 และ ใบ≥3) หรือ (ใบ≥10) หรือ (สูง≥5 และ ใบ≥2)","color":"gray","italic":true}]
 execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"aqua"}]
-
-# ตรวจสอบว่าผ่านหรือไม่
-execute if score @s ct.valid matches 1.. run function tree_cut:break_tree

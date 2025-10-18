@@ -7,7 +7,25 @@ scoreboard players set @s ct.leaves_total 0
 $data modify storage tree_cut:data block set value "$(block)"
 $data modify storage tree_cut:data leaves set value "$(leaves)"
 
+# เก็บตำแหน่งปัจจุบัน (context position) ไม่ใช่ตำแหน่งผู้เล่น
+summon marker ~ ~ ~ {Tags:["ct.position_marker"]}
+execute as @e[type=marker,tag=ct.position_marker,limit=1] store result storage tree_cut:data gather_pos_x int 1 run data get entity @s Pos[0]
+execute as @e[type=marker,tag=ct.position_marker,limit=1] store result storage tree_cut:data gather_pos_y int 1 run data get entity @s Pos[1]
+execute as @e[type=marker,tag=ct.position_marker,limit=1] store result storage tree_cut:data gather_pos_z int 1 run data get entity @s Pos[2]
+execute as @e[type=marker,tag=ct.position_marker,limit=1] store result storage tree_cut:data trunk_x int 1 run data get entity @s Pos[0]
+execute as @e[type=marker,tag=ct.position_marker,limit=1] store result storage tree_cut:data trunk_y int 1 run data get entity @s Pos[1]
+execute as @e[type=marker,tag=ct.position_marker,limit=1] store result storage tree_cut:data trunk_z int 1 run data get entity @s Pos[2]
+kill @e[type=marker,tag=ct.position_marker]
+
 execute if score #config.debug ct.count matches 1.. run tellraw @s {"text":"[DEBUG] Starting tree scan...","color":"gray"}
+
+execute if score #config.debug ct.count matches 1.. run summon marker ~ ~ ~ {Tags:["ct.pos_temp"]}
+execute if score #config.debug ct.count matches 1.. as @e[type=marker,tag=ct.pos_temp,limit=1,sort=nearest] store result score #pos_x ct.count run data get entity @s Pos[0]
+execute if score #config.debug ct.count matches 1.. as @e[type=marker,tag=ct.pos_temp,limit=1,sort=nearest] store result score #pos_y ct.count run data get entity @s Pos[1]
+execute if score #config.debug ct.count matches 1.. as @e[type=marker,tag=ct.pos_temp,limit=1,sort=nearest] store result score #pos_z ct.count run data get entity @s Pos[2]
+execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"💥 [BREAK] ","color":"red","bold":true},{"text":"Position: ","color":"gray"},{"text":"(","color":"dark_gray"},{"score":{"name":"#pos_x","objective":"ct.count"},"color":"yellow","bold":true},{"text":", ","color":"dark_gray"},{"score":{"name":"#pos_y","objective":"ct.count"},"color":"yellow","bold":true},{"text":", ","color":"dark_gray"},{"score":{"name":"#pos_z","objective":"ct.count"},"color":"yellow","bold":true},{"text":")","color":"dark_gray"},{"text":" [Player-mined]","color":"aqua","italic":true}]
+execute if score #config.debug ct.count matches 1.. run kill @e[type=marker,tag=ct.pos_temp]
+
 execute if score #config.debug ct.count matches 1.. run tellraw @s [{"text":"[DEBUG] Checking scan positions...","color":"gray"}]
 
 execute if score #config.debug ct.count matches 1.. positioned ~ ~1 ~ if block ~ ~ ~ #minecraft:logs run tellraw @s {"text":"[DEBUG] Found logs above, scanning from above","color":"yellow"}

@@ -1,0 +1,11 @@
+# Reset mining scores (เรียกหลังจาก detect)
+scoreboard players set @s ct.mined_oak 0
+scoreboard players set @s ct.mined_spruce 0
+scoreboard players set @s ct.mined_birch 0
+scoreboard players set @s ct.mined_jungle 0
+scoreboard players set @s ct.mined_acacia 0
+scoreboard players set @s ct.mined_dark_oak 0
+scoreboard players set @s ct.mined_mangrove 0
+scoreboard players set @s ct.mined_cherry 0
+scoreboard players set @s ct.mined_crimson 0
+scoreboard players set @s ct.mined_warped 0

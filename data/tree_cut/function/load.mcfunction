@@ -16,13 +16,10 @@ scoreboard objectives add ct.height dummy
 scoreboard objectives add ct.leaves_total dummy
 scoreboard objectives add ct.destroyed dummy "Blocks Destroyed"
 
-# เอาออกแล้ว ใช้ ct.count เป็น namespace เดียวกันทั้งหมด
-
 function tree_cut:config
 
-# แสดงข้อความ banner สวยงาม
 tellraw @a {"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"dark_green","bold":true}
-tellraw @a [{"text":"  🪓 Tree Cut Datapack ","color":"green","bold":true},{"text":"v1.2","color":"yellow"}]
+tellraw @a [{"text":"  🪓 Tree Cut Datapack ","color":"green","bold":true},{"text":"v2.0","color":"yellow"}]
 tellraw @a {"text":"  Automatically cut entire trees!","color":"gray","italic":true}
 tellraw @a {"text":""}
 tellraw @a [{"text":"  Developer: ","color":"gray"},{"text":"Akalak Kruaboon","color":"aqua","bold":true}]

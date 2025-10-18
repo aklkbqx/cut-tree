@@ -1,4 +1,4 @@
-# 🪓 Tree Cut Datapack v1.2
+# 🪓 Tree Cut Datapack v2.0
 
 🌲Cut down entire trees (just wood, you know 🙂) in one go!
 
@@ -6,12 +6,10 @@ For Minecraft Java Edition **1.21+** (pack_format 48-88)
 
 ---
 
-## 🆕 New Update v1.2
+## 🆕 New Update v2.0
 
 ### ✨ New Feature:
-- 🪵All log is gathered in one place.
-
-### 🔧 Improvements:
+- 🪵 **All logs gathered in one place** - Collect logs at player position or tree trunk (configurable)
 
 ---
 
@@ -22,7 +20,8 @@ For Minecraft Java Edition **1.21+** (pack_format 48-88)
 - 🛡️ **100% Safe** - Real tree inspection system with 3 criteria to prevent damage to houses/structures
 - 🎯 **Accurate block count** - Displays the actual number of blocks destroyed every time
 - 🔨 **Axe saver** - Reduces durability by only 10% of the number of trees
-- ⚙️ **Customizable** - Set debug mode, maximum size, durability, and leaf destruction
+- 🪵 **Item gathering** - All logs automatically gather at your position or tree trunk (NEW!)
+- ⚙️ **Customizable** - Set debug mode, maximum size, durability, leaf destruction, and gather location
 - 🍃 **Automatic leaf destruction** - Turn on/off as desired (default: off)
 - ⚡ **High performance** - Tree size limit + recursive scanning system
 - 🎨 **Beautiful UI/UX** - Debug messages with emoji and colors, easy to read
@@ -76,6 +75,9 @@ scoreboard players set #config.break_leaves ct.count 1
 # Note: If open, only 10% discount will be given from the amount of wood cut.
 scoreboard players set #config.damage_axe ct.count 1
 
+# Gather all logs in one place (0=off, 1=player position, 2=tree trunk)
+scoreboard players set #config.gather_location ct.count 1
+
 ```
 
 Don't forget to `/reload` after editing!
@@ -116,6 +118,7 @@ scoreboard players set #config.break_leaves ct.count 1
 | `#config.max_logs` | `5000` | Maximum number of wooden blocks that can be cut at one time |
 | `#config.break_leaves` | `0` | Automatically destroy leaves (0=off, 1=on) |
 | `#config.damage_axe` | `1` | Reduces the durability of the axe (0=off, 1=on) - only 10% off! |
+| `#config.gather_location` | `1` | Gather logs in one place (0=off, 1=player position, 2=tree trunk) |
 
 ---
 
@@ -154,6 +157,15 @@ A: **Only 10% of the cost is lost!** (v1.1)
 
 A: **Yes!** The datapack will automatically detect and cut down 2x2 trees (Jungle and Dark Oak).
 
+### Q: Can I gather all logs in one place?
+
+A: **Yes! (v2.0)** - Configure with `#config.gather_location`:
+- `0` = Off (logs drop normally)
+- `1` = Player position (logs teleport to you) - **Recommended!**
+- `2` = Tree trunk (logs gather at the base of the tree)
+
+Example: `/scoreboard players set #config.gather_location ct.count 1`
+
 ### Q: Does it work in multiplayer?
 
 A: Yes! It works in both single-player and multiplayer.
@@ -186,7 +198,7 @@ A: The datapack automatically uses the vanilla sounds:
 - Developer: Akalak Kruaboon
 - **Instagram**: [@akl.kbqx](https://instagram.com/akl.kbqx)
 - **GitHub**: [@aklkbqx](https://github.com/aklkbqx)
-- Version: 1.2
+- Version: 2.0
 - **Pack Format**: 48-88 (MC 1.21+)
 - last update: 17 October 2025
 
